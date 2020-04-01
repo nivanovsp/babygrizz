@@ -30,9 +30,7 @@ urlpatterns = [
     # Blog pages
     path('', views.home, name='home'),
     path('blog/', views.all_blogs, name='all_blogs'),
-    path('blog/cat_one', views.cat_one, name='cat_one'),
-    path('blog/cat_two', views.cat_two, name='cat_two'),
-    path('blog/cat_three', views.cat_three, name='cat_three'),
+    url(r'^list$', views.all_blogs),
     path('blog/<int:blog_id>/', views.detail, name='detail'),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
 ]
