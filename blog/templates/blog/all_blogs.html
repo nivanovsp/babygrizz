@@ -4,52 +4,138 @@
 
 {% block content %}
 
-<div class="row justify-content-center mb-3">
-    <div class="col-md-9 text-center">
-        <h1 id="hometext" class="font-weight-bold">Baby Grizz Blog</h1>
-    </div>
+<!-- Title and message -->
+<div class="container">
+    <h2>Baby Grizzly</h2>
+    <br>
+    <h5 class="mt-5">Let's see what we are doing</h5>
+    <br>
+
+    <!-- Search form -->
+    <form method="get" class="uniForm">
+        <div class="form-row">
+            <div class="col-lg">
+                {{ filter.form.title|as_crispy_field }}
+            </div>
+            <div class="form-group col-lg align-self-end">
+                <button class="btn btn-primary" id="btn" name="btn" type="submit">Search</button>
+            </div>
+        </div>
+    </form>
 </div>
 
-<h5 class="mt-5">Let's see what we are doing</h5>
-<hr>
+<!-- Nav pills -->
 
-<form method="get" class="uniForm">
-    <div class="form-row">
-        <div class="col-auto">
-            {{ filter.form.title|as_crispy_field }}
-        </div>
-        <div class="col-auto">
-            {{ filter.form.category|as_crispy_field }}
-        </div>
-        <div class="form-group col-md-2 align-self-end">
-            <button class="btn btn-outline-secondary" id="btn" name="btn" type="submit">Search</button>
-        </div>
-    </div>
-</form>
-<hr>
+<div class="container bg-light">
+    <ul class="nav nav-tabs nav-fill" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="pill" href="#all">All</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="pill" href="#cat1">Category 1</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="pill" href="#cat2">Category 2</a>
+        </li>
+    </ul>
+</div>
 
-<div class="row row-cols-1 row-cols-md-3">
-    {% for obj in filter.qs %}
-    {% if obj.published %}
-    <div class="col-4">
-        <div class="card h-100">
-            <a href="{% url 'detail' obj.id %}">
-                <img src="{{ obj.image.url }}" class="card-img-top">
-            </a>
-            <div class="card-body">
-                <a href="{% url 'detail' obj.id %}">
-                    <h5 class="card-title">{{ obj.title }}</h5>
-                </a>
-                <h6>{{ obj.category }}</h6>
-                <p class="card-text">{{ obj.description|striptags|truncatechars:100 }}</p>
-                <p class="card-text"><small class="text-muted">{{ obj.publish|date:'M d Y'|upper }}</small></p>
+
+<!-- Tab panes -->
+<div class="container bg-light text-dark">
+    <div class="tab-content">
+        <div id="all" class="container-fluid tab-pane active"><br>
+            <div class="row align-items-center">
+                {% for obj in filter.qs %}
+                {% if obj.published %}
+                {% if obj.category %}
+                <div class="col-lg-4">
+                    <div class="card-deck">
+                        <div class="card">
+                            <a href="{% url 'detail' obj.id %}">
+                                <img class="card-img-top" src="{{ obj.image.url }}" alt="Card image cap">
+                            </a>
+                            <div class="card-body">
+                                <a href="{% url 'detail' obj.id %}">
+                                    <h5 class="card-title">Title: {{ obj.title }}</h5>
+                                </a>
+                                <h6>Category: {{ obj.category }}</h6>
+                                <p class="card-text">{{ obj.description|striptags|truncatechars:100 }}</p>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted">Published: {{ obj.publish|date:'M d Y' }}</small>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                </div>
+                {% endif %}
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <div id="cat1" class="container-fluid tab-pane fade"><br>
+            <div class="row align-items-center">
+                {% for obj in filter.qs %}
+                {% if obj.published %}
+                {% if obj.category == 'Category 1' %}
+                <div class="col-lg-4">
+                    <div class="card-deck">
+                        <div class="card">
+                            <a href="{% url 'detail' obj.id %}">
+                                <img class="card-img-top" src="{{ obj.image.url }}" alt="Card image cap">
+                            </a>
+                            <div class="card-body">
+                                <a href="{% url 'detail' obj.id %}">
+                                    <h5 class="card-title">Title: {{ obj.title }}</h5>
+                                </a>
+                                <h6>Category: {{ obj.category }}</h6>
+                                <p class="card-text">{{ obj.description|striptags|truncatechars:100 }}</p>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted">Published: {{ obj.publish|date:'M d Y' }}</small>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                </div>
+                {% endif %}
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <div id="cat2" class="container-fluid tab-pane fade"><br>
+            <div class="row align-items-center">
+                {% for obj in filter.qs %}
+                {% if obj.published %}
+                {% if obj.category == 'Category 2' %}
+                <div class="col-lg-4">
+                    <div class="card-deck">
+                        <div class="card">
+                            <a href="{% url 'detail' obj.id %}">
+                                <img class="card-img-top" src="{{ obj.image.url }}" alt="Card image cap">
+                            </a>
+                            <div class="card-body">
+                                <a href="{% url 'detail' obj.id %}">
+                                    <h5 class="card-title">Title: {{ obj.title }}</h5>
+                                </a>
+                                <h6>Category: {{ obj.category }}</h6>
+                                <p class="card-text">{{ obj.description|striptags|truncatechars:100 }}</p>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted">Published: {{ obj.publish|date:'M d Y' }}</small>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                </div>
+                {% endif %}
+                {% endif %}
+                {% endfor %}
             </div>
         </div>
     </div>
-    {% endif %}<br/>
-    {% endfor %}
 </div>
-
 
 {% load static %}
 

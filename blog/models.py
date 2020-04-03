@@ -20,6 +20,9 @@ class Blog(models.Model):
         tomorrow = datetime.date.today() + datetime.timedelta(1)
         return tomorrow > self.publish
 
+    def blog_category(self, category):
+        return category
+
 
 # Create filters
 class Filter(django_filters.FilterSet):

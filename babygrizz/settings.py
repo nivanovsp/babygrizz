@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'blog',
     'ckeditor',
     'crispy_forms',
+    'bootstrap4',
 ]
 
 MIDDLEWARE = [
@@ -128,7 +129,7 @@ CKEDITOR_RESTRICT_BY_USER = True
 CKEDITOR_CONFIGS = {
     'default': {
         'toolbar': 'Advanced',
-        'width': 758,
-        'height': 300,
+        'width': 1080,
+        'height': 600,
     },
 }
