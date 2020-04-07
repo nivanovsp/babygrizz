@@ -9,10 +9,28 @@ def home(request):
     return render(request, 'blog/home.html')
 
 
+def blog(request):
+    blogs = Blog.objects.all()
+    f = Filter(request.GET, queryset=Blog.objects.order_by('-publish')[:6])
+    return render(request, 'blog/blog.html', {'blogs': blogs, 'filter': f})
+
+
 def all_blogs(request):
-    blogs = Blog.objects.all().order_by('-publish')
-    f = Filter(request.GET, queryset=Blog.objects.all())
+    blogs = Blog.objects.all()
+    f = Filter(request.GET, queryset=Blog.objects.all().order_by('-publish'))
     return render(request, 'blog/all_blogs.html', {'blogs': blogs, 'filter': f})
+
+
+def cat_one(request):
+    blogs = Blog.objects.all()
+    f = Filter(request.GET, queryset=Blog.objects.all().order_by('-publish'))
+    return render(request, 'blog/category1.html', {'blogs': blogs, 'filter': f})
+
+
+def cat_two(request):
+    blogs = Blog.objects.all()
+    f = Filter(request.GET, queryset=Blog.objects.all().order_by('-publish'))
+    return render(request, 'blog/category2.html', {'blogs': blogs, 'filter': f})
 
 
 def detail(request, blog_id):

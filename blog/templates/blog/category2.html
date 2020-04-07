@@ -1,5 +1,7 @@
 {% extends 'blog/base_blogs.html' %}
 
+{% load crispy_forms_tags %}
+
 {% block blog_content %}
 
 <div class="container-fluid bg-light">
@@ -8,7 +10,7 @@
         <!-- Blog Post -->
         {% for obj in filter.qs %}
         {% if obj.published %}
-        {% if obj.category %}
+        {% if obj.category == 'Category 2' %}
         <div class="col-md-4">
             <div class="card mb-4">
                 <img class="card-img-top" src="{{ obj.image.url }}">
@@ -16,7 +18,7 @@
                     <h2 class="card-title">Title: {{ obj.title }}</h2>
                     <h4>Category: {{ obj.category }}</h4>
                     <p class="card-text">{{ obj.description|striptags|truncatechars:100 }}</p>
-                    <a href="{% url 'home' %}" class="btn btn-primary">Read More &rarr;</a>
+                    <a href="#" class="btn btn-primary">Read More &rarr;</a>
                 </div>
                 <div class="card-footer text-muted">
                     Posted on {{ obj.publish|date:'M d Y' }}
