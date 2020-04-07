@@ -16,7 +16,7 @@
                     <h2 class="card-title">Title: {{ obj.title }}</h2>
                     <h4>Category: {{ obj.category }}</h4>
                     <p class="card-text">{{ obj.description|striptags|truncatechars:100 }}</p>
-                    <a href="{% url 'home' %}" class="btn btn-primary">Read More &rarr;</a>
+                    <a href="{% url 'detail' obj.id %}" class="btn btn-primary">Read More &rarr;</a>
                 </div>
                 <div class="card-footer text-muted">
                     Posted on {{ obj.publish|date:'M d Y' }}
@@ -28,8 +28,6 @@
         {% endfor %}
     </div>
 </div>
-
-<!-- /.container -->
 
 {% load static %}
 
