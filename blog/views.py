@@ -2,6 +2,9 @@ from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from .models import Blog
 from .models import Filter
+from .forms import CommentForm
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 
 # Create your views here.
@@ -35,4 +38,27 @@ def cat_two(request):
 
 def detail(request, blog_id):
     blog = get_object_or_404(Blog, pk=blog_id)
-    return render(request, 'blog/detail.html', {'blog': blog})
+    comments = blog.comments.filter(active=True)
+    new_comment = None
+
+    # Comment posted
+    if request.method == 'POST':
+        comment_form = CommentForm(data=request.POST)
+        if comment_form.is_valid():
+            # Create Comment object but don't save to database yet
+            new_comment = comment_form.save(commit=False)
+            # Assign the current post to the comment
+            new_comment.post = blog
+            # Save the comment to the database
+            new_comment.save()
+            return HttpResponseRedirect(reverse('comment_success'))
+    else:
+        comment_form = CommentForm()
+        comment_form.data['name', 'email', 'body'] = None
+
+    return render(request, 'blog/detail.html',
+                  {'blog': blog, 'comments': comments, 'new_comment': new_comment, 'comment_form': comment_form})
+
+
+def comment_success(request):
+    return render(request, 'blog/comment_success.html')

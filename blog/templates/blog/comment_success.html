@@ -1,0 +1,46 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+<style type="text/css">
+    #mmenu_screen > .row {
+        min-height: 100vh;
+    }
+
+    .flex-fill {
+        flex:1 1 auto;
+    }
+
+</style>
+
+<br>
+<div id="mmenu_screen" class="container-fluid main_container bg-transparent text-dark d-flex">
+    <div class="row flex-fill">
+        <div class="col-sm-12 mmenu_screen--direktaction bg-transparent flex-fill">
+            <section class="h-100">
+                <header class="container h-100">
+                    <div class="d-flex align-items-center justify-content-center h-100">
+                        <div class="card text-center">
+                            <div class="card-header">
+                                <h4 class="my-4">Baby Grizzly Blog</h4>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="card-title">Thank you</h3>
+                                <p class="card-text">Your comment was successfully submited and is awaiting review</p>
+                            </div>
+                            <div class="card-footer text-muted">
+                                <br>
+                                <a href="{% url 'blog' %}" class="btn btn-primary">Explore More Blogs</a>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+            </section>
+        </div>
+    </div>
+</div>
+
+{% load static %}
+
+{% endblock %}
