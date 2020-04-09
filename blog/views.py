@@ -8,10 +8,12 @@ from django.urls import reverse
 
 
 # Create your views here.
+# Home view
 def home(request):
     return render(request, 'blog/home.html')
 
 
+# Blog views
 def blog(request):
     blogs = Blog.objects.all()
     f = Filter(request.GET, queryset=Blog.objects.order_by('-publish')[:6])
@@ -22,18 +24,6 @@ def all_blogs(request):
     blogs = Blog.objects.all()
     f = Filter(request.GET, queryset=Blog.objects.all().order_by('-publish'))
     return render(request, 'blog/all_blogs.html', {'blogs': blogs, 'filter': f})
-
-
-def cat_one(request):
-    blogs = Blog.objects.all()
-    f = Filter(request.GET, queryset=Blog.objects.all().order_by('-publish'))
-    return render(request, 'blog/category1.html', {'blogs': blogs, 'filter': f})
-
-
-def cat_two(request):
-    blogs = Blog.objects.all()
-    f = Filter(request.GET, queryset=Blog.objects.all().order_by('-publish'))
-    return render(request, 'blog/category2.html', {'blogs': blogs, 'filter': f})
 
 
 def detail(request, blog_id):
@@ -62,3 +52,22 @@ def detail(request, blog_id):
 
 def comment_success(request):
     return render(request, 'blog/comment_success.html')
+
+
+# Category views
+def all_categories(request):
+    blogs = Blog.objects.all()
+    f = Filter(request.GET, queryset=Blog.objects.all().order_by('-publish'))
+    return render(request, 'blog/all_categories.html', {'blogs': blogs, 'filter': f})
+
+
+def cat_one(request):
+    blogs = Blog.objects.all()
+    f = Filter(request.GET, queryset=Blog.objects.all().order_by('-publish'))
+    return render(request, 'blog/category1.html', {'blogs': blogs, 'filter': f})
+
+
+def cat_two(request):
+    blogs = Blog.objects.all()
+    f = Filter(request.GET, queryset=Blog.objects.all().order_by('-publish'))
+    return render(request, 'blog/category2.html', {'blogs': blogs, 'filter': f})

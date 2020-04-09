@@ -4,7 +4,7 @@
 <!-- Blog Entries Column -->
 <div class="col-md-8">
     <h1 class="my-4">Baby Grizzly
-        <small>Category 2</small>
+        <small>All Blog Categories</small>
     </h1>
 </div>
 {% endblock %}
@@ -12,20 +12,42 @@
 {% block blog_content %}
 
 <div class="container-fluid bg-light">
+    <h3>Category 1</h3>
+    <hr>
     <div class="row align-items-center">
+        {% for obj in filter.qs %}
+        {% if obj.published %}
+        {% if obj.category == 'Category 1' %}
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Title: {{ obj.title }}</h5>
+                    <p class="card-text">{{ obj.description|striptags|truncatechars:100 }}</p>
+                    <a href="{% url 'detail' obj.id %}" class="btn btn-primary">Read More &rarr;</a>
+                </div>
+                <div class="card-footer text-muted">
+                    Posted on {{ obj.publish|date:'M d Y' }}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+    </div>
 
-        <!-- Blog Post -->
+    <br>
+    <h3>Category 2</h3>
+    <hr>
+    <div class="row align-items-center">
         {% for obj in filter.qs %}
         {% if obj.published %}
         {% if obj.category == 'Category 2' %}
         <div class="col-md-4">
             <div class="card mb-4">
-                <img class="card-img-top" src="{{ obj.image.url }}">
                 <div class="card-body">
-                    <h2 class="card-title">Title: {{ obj.title }}</h2>
-                    <h4>Category: {{ obj.category }}</h4>
+                    <h5 class="card-title">Title: {{ obj.title }}</h5>
                     <p class="card-text">{{ obj.description|striptags|truncatechars:100 }}</p>
-                    <a href="{% url 'detail' obj.id %}" class="btn btn-primary">Read More &rarr;</a>
+                    <a href="#" class="btn btn-primary">Read More &rarr;</a>
                 </div>
                 <div class="card-footer text-muted">
                     Posted on {{ obj.publish|date:'M d Y' }}
@@ -46,6 +68,7 @@
         </div>
     </div>
 </div>
+
 
 {% load static %}
 

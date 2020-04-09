@@ -1,5 +1,6 @@
 {% extends 'blog/base.html' %}
 
+
 {% block content %}
 
 <style type="text/css">
@@ -10,6 +11,7 @@
     .flex-fill {
         flex:1 1 auto;
     }
+
 
 </style>
 
@@ -30,7 +32,7 @@
                             </div>
                             <div class="card-footer text-muted">
                                 <br>
-                                <a href="{% url 'blog' %}" class="btn btn-primary">Explore More Blogs</a>
+                                <a href="{% url 'all_blogs' %}" class="btn btn-primary">Explore More Blogs</a>
                                 <br>
                             </div>
                         </div>

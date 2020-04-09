@@ -7,12 +7,7 @@
 <!-- Page Content -->
 <div class="container-fluid bg-light">
 
-    <!-- Blog Entries Column -->
-    <div class="col-md-8">
-        <h1 class="my-4">Baby Grizzly
-            <small>Blog</small>
-        </h1>
-    </div>
+    {% block page_title %}{% endblock %}
 
     <div class="row">
         <!-- Sidebar Widgets Column -->
@@ -45,7 +40,7 @@
                         <div class="col-lg-6">
                             <ul class="list-unstyled">
                                 <li>
-                                    <a href="{% url 'all_blogs' %}">All Blogs</a>
+                                    <a href="{% url 'all_categories' %}">All Categories</a>
                                 </li>
                                 <li>
                                     <a href="{% url 'cat_one' %}">Category 1</a>

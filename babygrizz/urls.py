@@ -30,7 +30,8 @@ urlpatterns = [
     # Blog pages
     path('', views.home, name='home'),
     path('blog/', views.blog, name='blog'),
-    path('blog/all', views.all_blogs, name='all_blogs'),
+    path('blog/all_blogs', views.all_blogs, name='all_blogs'),
+    path('blog/all_categories', views.all_categories, name='all_categories'),
     path('blog/category1/', views.cat_one, name='cat_one'),
     path('blog/category2/', views.cat_two, name='cat_two'),
     url(r'^list$', views.all_blogs),
