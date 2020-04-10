@@ -23,6 +23,10 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ obj.title }}</h5>
                     <p class="card-text">{{ obj.description|striptags|truncatechars:50 }}</p>
+                    <p>Author:
+                        <a href="{% url 'author' obj.user_id %}">{{ obj.user.first_name }} {{ obj.user.last_name }}</a>
+                    </p>
+                    <a href="{% url 'detail' obj.id %}" class="btn btn-primary">Read More &rarr;</a>
                     <a href="{% url 'detail' obj.id %}" class="btn btn-primary">Read More &rarr;</a>
                 </div>
                 <div class="card-footer text-muted">
@@ -47,6 +51,9 @@
                 <div class="card-body">
                     <h5 class="card-title">Title: {{ obj.title }}</h5>
                     <p class="card-text">{{ obj.description|striptags|truncatechars:80 }}</p>
+                    <p>Author:
+                        <a href="{% url 'author' obj.user_id %}">{{ obj.user.first_name }} {{ obj.user.last_name }}</a>
+                    </p>
                     <a href="{% url 'detail' obj.id %}" class="btn btn-primary">Read More &rarr;</a>
                 </div>
                 <div class="card-footer text-muted">

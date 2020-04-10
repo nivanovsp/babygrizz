@@ -4,7 +4,7 @@
 <!-- Blog Entries Column -->
 <div class="col-md-8">
     <h1 class="my-4">Baby Grizzly
-        <small>All Blog Categories</small>
+        <small>Blog</small>
     </h1>
 </div>
 {% endblock %}
@@ -22,10 +22,12 @@
                 <img class="card-img-top" src="{{ obj.image.url }}">
                 <div class="card-body">
                     <h5 class="card-title">{{ obj.title }}</h5>
-                    <p>Category: {{ obj.category }}</p>
+                    <p>Category:
+                        <a href="{% url 'category' obj.category %}">{{ obj.category }}</a>
+                    </p>
                     <p class="card-text">{{ obj.description|striptags|truncatechars:100 }}</p>
                     <p>Author:
-                        <a href="#">{{ obj.user.first_name }} {{ obj.user.last_name }}</a>
+                        <a href="{% url 'author' obj.user_id %}">{{ obj.user.first_name }} {{ obj.user.last_name }}</a>
                     </p>
                     <a href="{% url 'detail' obj.id %}" class="btn btn-primary">Read More &rarr;</a>
                 </div>
@@ -42,6 +44,7 @@
         <div class="col-sm-12">
             <div class="d-flex justify-content-around">
                 <a href="{% url 'all_blogs' %}" class="btn btn-primary btn-lg">View All Blogs</a>
+                <a href="{% url 'all_categories' %}" class="btn btn-primary btn-lg">All Categories</a>
             </div>
             <br>
         </div>

@@ -32,12 +32,11 @@ urlpatterns = [
     path('blog/', views.blog, name='blog'),
     path('blog/all_blogs', views.all_blogs, name='all_blogs'),
     path('blog/all_categories', views.all_categories, name='all_categories'),
-    path('blog/category1/', views.cat_one, name='cat_one'),
-    path('blog/category2/', views.cat_two, name='cat_two'),
+    path('blog/<str:category>/', views.category, name='category'),
     url(r'^list$', views.all_blogs),
-    path('blog/<int:blog_id>/', views.detail, name='detail'),
+    path('blog/blog/<int:blog_id>/', views.detail, name='detail'),
     path('blog/success', views.comment_success, name='comment_success'),
-    path('blog/author/<int:user>/', views.user, name='user'),
+    path('blog/author/<int:user>/', views.author, name='author'),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
 ]
 

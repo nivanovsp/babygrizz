@@ -61,25 +61,28 @@ def all_categories(request):
     return render(request, 'blog/all_categories.html', {'blogs': blogs, 'filter': f})
 
 
-def cat_one(request):
-    blogs = Blog.objects.all()
-    f = Filter(request.GET, queryset=Blog.objects.all().order_by('-publish'))
-    return render(request, 'blog/category1.html', {'blogs': blogs, 'filter': f})
-
-
-def cat_two(request):
-    blogs = Blog.objects.all()
-    f = Filter(request.GET, queryset=Blog.objects.all().order_by('-publish'))
-    return render(request, 'blog/category2.html', {'blogs': blogs, 'filter': f})
+def category(request, category):
+    if category == 'Category 1':
+        blogs = Blog.objects.all()
+        f = Filter(request.GET, queryset=Blog.objects.filter(category='Category 1').order_by('-publish'))
+        category = Filter(request.GET, queryset=Blog.objects.filter(category='Category 1')[:1])
+        return render(request, 'blog/category.html', {'blogs': blogs, 'filter': f, 'category': category})
+    else:
+        blogs = Blog.objects.all()
+        f = Filter(request.GET, queryset=Blog.objects.filter(category='Category 2').order_by('-publish'))
+        category = Filter(request.GET, queryset=Blog.objects.filter(category='Category 2')[:1])
+        return render(request, 'blog/category.html', {'blogs': blogs, 'filter': f, 'category': category})
 
 
 # User views
-def user(request, user):
+def author(request, user):
     if user == 1:
         blogs = get_object_or_404(Blog, pk=user)
         f = Filter(request.GET, queryset=Blog.objects.filter(user=1).order_by('-publish'))
-        return render(request, 'blog/user.html', {'blogs': blogs, 'filter': f})
+        author = Filter(request.GET, queryset=Blog.objects.filter(user=1)[:1])
+        return render(request, 'blog/author.html', {'blogs': blogs, 'filter': f, 'author': author})
     else:
         blogs = get_object_or_404(Blog, pk=user)
         f = Filter(request.GET, queryset=Blog.objects.filter(user=2).order_by('-publish'))
-        return render(request, 'blog/user.html', {'blogs': blogs, 'filter': f})
+        author = Filter(request.GET, queryset=Blog.objects.filter(user=2)[:1])
+        return render(request, 'blog/author.html', {'blogs': blogs, 'filter': f, 'author': author})

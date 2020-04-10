@@ -4,7 +4,9 @@
 <!-- Blog Entries Column -->
 <div class="col-md-8">
     <h1 class="my-4">Baby Grizzly
-        <small>Nikolay Ivanov</small>
+        {% for obj in author.qs %}
+        <small>{{ obj.user.first_name }} {{ obj.user.last_name }}</small>
+        {% endfor %}
     </h1>
 </div>
 {% endblock %}
@@ -24,9 +26,7 @@
                     <h5 class="card-title">{{ obj.title }}</h5>
                     <p>Category: {{ obj.category }}</p>
                     <p class="card-text">{{ obj.description|striptags|truncatechars:100 }}</p>
-                    <p>Author:
-                        <a href="#">{{ obj.user.first_name }} {{ obj.user.last_name }}</a>
-                    </p>
+                    <p>Author: {{ obj.user.first_name }} {{ obj.user.last_name }}</p>
                     <a href="{% url 'detail' obj.id %}" class="btn btn-primary">Read More &rarr;</a>
                 </div>
                 <div class="card-footer text-muted">

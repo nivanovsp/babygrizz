@@ -4,7 +4,9 @@
 <!-- Blog Entries Column -->
 <div class="col-md-8">
     <h1 class="my-4">Baby Grizzly
-        <small>Category 2</small>
+        {% for obj in category.qs %}
+        <small>{{ obj.category }}</small>
+        {% endfor %}
     </h1>
 </div>
 {% endblock %}
@@ -12,20 +14,20 @@
 {% block blog_content %}
 
 <div class="container-fluid bg-light">
-    <div class="row align-items-center">
 
-        <!-- Blog Post -->
+    <br>
+    <div class="row align-items-center">
         {% for obj in filter.qs %}
         {% if obj.published %}
-        {% if obj.category == 'Category 2' %}
         <div class="col-md-4">
             <div class="card mb-4">
                 <img class="card-img-top" src="{{ obj.image.url }}">
                 <div class="card-body">
                     <h5 class="card-title">{{ obj.title }}</h5>
+                    <p>Category: {{ obj.category }}</p>
                     <p class="card-text">{{ obj.description|striptags|truncatechars:100 }}</p>
                     <p>Author:
-                        <a href="#">{{ obj.user.first_name }} {{ obj.user.last_name }}</a>
+                        <a href="{% url 'author' obj.user_id %}">{{ obj.user.first_name }} {{ obj.user.last_name }}</a>
                     </p>
                     <a href="{% url 'detail' obj.id %}" class="btn btn-primary">Read More &rarr;</a>
                 </div>
@@ -35,19 +37,21 @@
             </div>
         </div>
         {% endif %}
-        {% endif %}
         {% endfor %}
     </div>
+
 
     <div class="row flex-fill">
         <div class="col-sm-12">
             <div class="d-flex justify-content-around">
                 <a href="{% url 'all_blogs' %}" class="btn btn-primary btn-lg">View All Blogs</a>
+                <a href="{% url 'all_categories' %}" class="btn btn-primary btn-lg">All Categories</a>
             </div>
             <br>
         </div>
     </div>
 </div>
+
 
 {% load static %}
 
