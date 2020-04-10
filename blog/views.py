@@ -71,3 +71,15 @@ def cat_two(request):
     blogs = Blog.objects.all()
     f = Filter(request.GET, queryset=Blog.objects.all().order_by('-publish'))
     return render(request, 'blog/category2.html', {'blogs': blogs, 'filter': f})
+
+
+# User views
+def user(request, user):
+    if user == 1:
+        blogs = get_object_or_404(Blog, pk=user)
+        f = Filter(request.GET, queryset=Blog.objects.filter(user=1).order_by('-publish'))
+        return render(request, 'blog/user.html', {'blogs': blogs, 'filter': f})
+    else:
+        blogs = get_object_or_404(Blog, pk=user)
+        f = Filter(request.GET, queryset=Blog.objects.filter(user=2).order_by('-publish'))
+        return render(request, 'blog/user.html', {'blogs': blogs, 'filter': f})

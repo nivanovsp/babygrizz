@@ -4,6 +4,8 @@
 
 {% load crispy_forms_tags %}
 
+{% load embed_video_tags %}
+
 <br>
 <div class="container-fluid bg-light">
 
@@ -16,7 +18,14 @@
                 <h1 class="mt-4">{{ blog.title }}</h1>
                 <hr>
                 <!-- Date/Time -->
-                <p>Posted on {{ blog.created|date:'F jS Y' }}</p>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>Posted on {{ blog.created|date:'F jS Y' }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p>Created by {{ blog.user.first_name }} {{ blog.user.last_name }}</p>
+                    </div>
+                </div>
                 <hr>
                 <!-- Preview Image -->
                 <img class="img-fluid rounded" src="{{ blog.image.url }}" alt="">
@@ -24,9 +33,12 @@
                 <!-- Post Content -->
                 {{ blog.description|safe }}
 
+                <!-- Embeded video -->
+                {% video blog.video 'small' %}
+
                 <div class="row">
 
-                    <div class="col-md-8 card mb-4  mt-3 ">
+                    <div class="col-md-12 card mb-4  mt-3 ">
                         <div class="card-body">
                             <!-- comments -->
                             <h2>{{ comments.count }} comments</h2>
@@ -44,7 +56,7 @@
                             {% endfor %}
                         </div>
                     </div>
-                    <div class="col-md-8 card mb-4  mt-3 ">
+                    <div class="col-md-12 card mb-4  mt-3 ">
                         <div class="card-body">
                             <h3>Leave a comment</h3>
                             <form method="post" style="margin-top: 1.3em;">

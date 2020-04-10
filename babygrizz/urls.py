@@ -37,6 +37,7 @@ urlpatterns = [
     url(r'^list$', views.all_blogs),
     path('blog/<int:blog_id>/', views.detail, name='detail'),
     path('blog/success', views.comment_success, name='comment_success'),
+    path('blog/author/<int:user>/', views.user, name='user'),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
 ]
 

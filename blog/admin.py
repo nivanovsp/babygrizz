@@ -3,9 +3,9 @@ from .models import Blog, Comment
 
 
 class BlogAdmin(admin.ModelAdmin):
-    list_display = ('title', 'category', 'created', 'publish')
-    list_filter = ('title', 'category', 'created', 'publish')
-    search_fields = ('title', 'category', 'created', 'publish')
+    list_display = ('title', 'category', 'user', 'created', 'publish')
+    list_filter = ('title', 'category', 'user', 'created', 'publish')
+    search_fields = ('title', 'category', 'user', 'created', 'publish')
     readonly_fields = ('created',)
 
 

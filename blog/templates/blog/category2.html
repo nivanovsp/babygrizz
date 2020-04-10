@@ -22,9 +22,11 @@
             <div class="card mb-4">
                 <img class="card-img-top" src="{{ obj.image.url }}">
                 <div class="card-body">
-                    <h2 class="card-title">Title: {{ obj.title }}</h2>
-                    <h4>Category: {{ obj.category }}</h4>
+                    <h5 class="card-title">{{ obj.title }}</h5>
                     <p class="card-text">{{ obj.description|striptags|truncatechars:100 }}</p>
+                    <p>Author:
+                        <a href="#">{{ obj.user.first_name }} {{ obj.user.last_name }}</a>
+                    </p>
                     <a href="{% url 'detail' obj.id %}" class="btn btn-primary">Read More &rarr;</a>
                 </div>
                 <div class="card-footer text-muted">

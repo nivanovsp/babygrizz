@@ -21,8 +21,8 @@
         <div class="col-md-4">
             <div class="card mb-4">
                 <div class="card-body">
-                    <h5 class="card-title">Title: {{ obj.title }}</h5>
-                    <p class="card-text">{{ obj.description|striptags|truncatechars:100 }}</p>
+                    <h5 class="card-title">{{ obj.title }}</h5>
+                    <p class="card-text">{{ obj.description|striptags|truncatechars:50 }}</p>
                     <a href="{% url 'detail' obj.id %}" class="btn btn-primary">Read More &rarr;</a>
                 </div>
                 <div class="card-footer text-muted">
@@ -46,8 +46,8 @@
             <div class="card mb-4">
                 <div class="card-body">
                     <h5 class="card-title">Title: {{ obj.title }}</h5>
-                    <p class="card-text">{{ obj.description|striptags|truncatechars:100 }}</p>
-                    <a href="#" class="btn btn-primary">Read More &rarr;</a>
+                    <p class="card-text">{{ obj.description|striptags|truncatechars:80 }}</p>
+                    <a href="{% url 'detail' obj.id %}" class="btn btn-primary">Read More &rarr;</a>
                 </div>
                 <div class="card-footer text-muted">
                     Posted on {{ obj.publish|date:'M d Y' }}

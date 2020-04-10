@@ -2,6 +2,8 @@ from django.db import models
 from ckeditor.fields import RichTextField
 import datetime
 import django_filters
+from embed_video.fields import EmbedVideoField
+from django.contrib.auth.models import User
 
 
 # Create your models here.
@@ -10,8 +12,10 @@ class Blog(models.Model):
     category = models.CharField(max_length=30)
     description = RichTextField(null=True, blank=True)
     image = models.ImageField(upload_to='blog/images')
+    video = EmbedVideoField(blank=True)
     created = models.DateTimeField(auto_now_add=True)
     publish = models.DateField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return '{} | {} | {} | {}'.format(self.title, self.category, self.created, self.publish)
