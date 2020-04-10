@@ -29,6 +29,7 @@ urlpatterns = [
 
     # Blog pages
     path('', views.home, name='home'),
+    path('test_user/', views.test_user, name='test_user'),
     path('blog/', views.blog, name='blog'),
     path('blog/all_blogs', views.all_blogs, name='all_blogs'),
     path('blog/all_categories', views.all_categories, name='all_categories'),

@@ -1,0 +1,63 @@
+{% extends 'blog/base_blogs.html' %}
+
+{% block page_title %}
+<!-- Blog Entries Column -->
+<div class="col-md-8">
+    <h1 class="my-4">Baby Grizzly
+        <small>All Blogs</small>
+    </h1>
+</div>
+{% endblock %}
+
+{% block blog_content %}
+
+<div class="row">
+    <div class="p-3 mb-2 bg-dark text-white">
+
+        {% for p in user1 %}
+        <a href="{% url 'author' p.user_id %}">{{ p.user.first_name }} {{ p.user.last_name }}</a>
+        {% endfor %}
+
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="p-3 mb-2 bg-dark text-white">
+
+        {% for p in user2 %}
+        <a href="{% url 'author' p.user_id %}">{{ p.user.first_name }} {{ p.user.last_name }}</a>
+        {% endfor %}
+
+    </div>
+</div>
+
+
+<div class="row">
+    {% for obj in filter.qs %}
+    {% if obj.published %}
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">{{ obj.title }}</h5>
+                <p>Category:
+                    <a href="{% url 'category' obj.category %}">{{ obj.category }}</a>
+                </p>
+                <p class="card-text">{{ obj.description|striptags|truncatechars:50 }}</p>
+                <p>Author:
+                    <a href="{% url 'author' obj.user_id %}">{{ obj.user.first_name }} {{ obj.user.last_name }}</a>
+                </p>
+                <a href="{% url 'detail' obj.id %}" class="btn btn-primary">Read More &rarr;</a>
+            </div>
+            <div class="card-footer text-muted">
+                Posted on {{ obj.publish|date:'M d Y' }}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
+
+{% load static %}
+
+{% endblock %}

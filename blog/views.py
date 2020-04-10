@@ -5,6 +5,7 @@ from .models import Filter
 from .forms import CommentForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.db.models import Count
 
 
 # Create your views here.
@@ -16,7 +17,7 @@ def home(request):
 # Blog views
 def blog(request):
     blogs = Blog.objects.all()
-    f = Filter(request.GET, queryset=Blog.objects.order_by('-publish')[:6])
+    f = Filter(request.GET, queryset=Blog.objects.order_by('-publish'))
     return render(request, 'blog/blog.html', {'blogs': blogs, 'filter': f})
 
 
@@ -65,12 +66,14 @@ def category(request, category):
     if category == 'Category 1':
         blogs = Blog.objects.all()
         f = Filter(request.GET, queryset=Blog.objects.filter(category='Category 1').order_by('-publish'))
-        category = Filter(request.GET, queryset=Blog.objects.filter(category='Category 1')[:1])
+        category = Filter(request.GET, queryset=Blog.objects.filter(category='Category 1').values('category').annotate(
+            entries=Count('category')))
         return render(request, 'blog/category.html', {'blogs': blogs, 'filter': f, 'category': category})
     else:
         blogs = Blog.objects.all()
         f = Filter(request.GET, queryset=Blog.objects.filter(category='Category 2').order_by('-publish'))
-        category = Filter(request.GET, queryset=Blog.objects.filter(category='Category 2')[:1])
+        category = Filter(request.GET, queryset=Blog.objects.filter(category='Category 2').values('category').annotate(
+            entries=Count('category')))
         return render(request, 'blog/category.html', {'blogs': blogs, 'filter': f, 'category': category})
 
 
@@ -79,10 +82,22 @@ def author(request, user):
     if user == 1:
         blogs = get_object_or_404(Blog, pk=user)
         f = Filter(request.GET, queryset=Blog.objects.filter(user=1).order_by('-publish'))
-        author = Filter(request.GET, queryset=Blog.objects.filter(user=1)[:1])
-        return render(request, 'blog/author.html', {'blogs': blogs, 'filter': f, 'author': author})
+        author = Blog.objects.filter(user=1)
+        single_author = author[:1]
+        return render(request, 'blog/author.html', {'blogs': blogs, 'filter': f, 'author': single_author})
     else:
         blogs = get_object_or_404(Blog, pk=user)
         f = Filter(request.GET, queryset=Blog.objects.filter(user=2).order_by('-publish'))
-        author = Filter(request.GET, queryset=Blog.objects.filter(user=2)[:1])
-        return render(request, 'blog/author.html', {'blogs': blogs, 'filter': f, 'author': author})
+        author = Blog.objects.filter(user=2)
+        single_author = author[:1]
+        return render(request, 'blog/author.html', {'blogs': blogs, 'filter': f, 'author': single_author})
+
+
+def test_user(request):
+    user_1 = Blog.objects.filter(user=1)
+    user1 = user_1[:1]
+    user_2 = Blog.objects.filter(user=2)
+    user2 = user_2[:1]
+
+    f = Filter(request.GET, queryset=Blog.objects.all().order_by('-publish'))
+    return render(request, 'blog/test.html', {'user1': user1, 'user2': user2, 'filter': f})

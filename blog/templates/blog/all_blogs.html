@@ -29,7 +29,6 @@
                         <a href="{% url 'author' obj.user_id %}">{{ obj.user.first_name }} {{ obj.user.last_name }}</a>
                     </p>
                     <a href="{% url 'detail' obj.id %}" class="btn btn-primary">Read More &rarr;</a>
-                    <a href="{% url 'detail' obj.id %}" class="btn btn-primary">Read More &rarr;</a>
                 </div>
                 <div class="card-footer text-muted">
                     Posted on {{ obj.publish|date:'M d Y' }}
