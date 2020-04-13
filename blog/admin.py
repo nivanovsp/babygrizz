@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Blog, Comment
+from .models import Blog, Comment, Contact
 
 
 class BlogAdmin(admin.ModelAdmin):
@@ -19,7 +19,17 @@ class CommentAdmin(admin.ModelAdmin):
         queryset.update(active=True)
 
 
+class ContactUsAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'message', 'sent_on', 'processed')
+    list_filter = ('name', 'email', 'message', 'sent_on')
+    search_fields = ('name', 'email', 'message', 'sent_on')
+    actions = ['contact_processed']
+
+    def contact_processed(self, request, queryset):
+        queryset.update(processed=True)
+
 
 # Register your models here.
 admin.site.register(Blog, BlogAdmin)
 admin.site.register(Comment, CommentAdmin)
+admin.site.register(Contact, ContactUsAdmin)

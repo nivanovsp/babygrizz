@@ -1,4 +1,4 @@
-{% extends 'blog/base_blogs.html' %}
+{% extends 'base/base_blogs.html' %}
 
 {% block page_title %}
 <!-- Blog Entries Column -->
@@ -27,7 +27,7 @@
                     <p>Category:
                         <a href="{% url 'category' obj.category %}">{{ obj.category }}</a>
                     </p>
-                    <p class="card-text">{{ obj.description|striptags|truncatechars:100 }}</p>
+                    <p class="card-text">{{ obj.description|striptags|truncatechars:50 }}</p>
                     <p>Author: {{ obj.user.first_name }} {{ obj.user.last_name }}</p>
                     <a href="{% url 'detail' obj.id %}" class="btn btn-primary">Read More &rarr;</a>
                 </div>

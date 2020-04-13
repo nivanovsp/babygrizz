@@ -29,6 +29,8 @@ urlpatterns = [
 
     # Blog pages
     path('', views.home, name='home'),
+    path('home/contact_us/', views.contact_us, name='contact_us'),
+    path('home/contact_success/', views.contact_success, name='contact_success'),
     path('test_user/', views.test_user, name='test_user'),
     path('blog/', views.blog, name='blog'),
     path('blog/all_blogs', views.all_blogs, name='all_blogs'),

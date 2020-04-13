@@ -2,16 +2,15 @@ from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from .models import Blog
 from .models import Filter
-from .forms import CommentForm
+from .forms import CommentForm, ContactForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.db.models import Count
 
 
-# Create your views here.
 # Home view
 def home(request):
-    return render(request, 'blog/home.html')
+    return render(request, 'website/home.html')
 
 
 # Blog views
@@ -64,7 +63,8 @@ def all_categories(request):
     category = Filter(request.GET, queryset=Blog.objects.filter(category='Category 1').values('category').annotate(
         entries=Count('category')))
     categories_list = Filter(request.GET, queryset=Blog.objects.values('category').annotate(entries=Count('category')))
-    return render(request, 'blog/all_categories.html', {'blogs': blogs, 'filter': f, 'category': category, 'categories_list': categories_list})
+    return render(request, 'blog/all_categories.html',
+                  {'blogs': blogs, 'filter': f, 'category': category, 'categories_list': categories_list})
 
 
 def category(request, category):
@@ -74,13 +74,15 @@ def category(request, category):
         f = Filter(request.GET, queryset=Blog.objects.filter(category='Category 1').order_by('-publish'))
         category = Filter(request.GET, queryset=Blog.objects.filter(category='Category 1').values('category').annotate(
             entries=Count('category')))
-        return render(request, 'blog/category.html', {'blogs': blogs, 'filter': f, 'category': category, 'categories_list': categories_list})
+        return render(request, 'blog/category.html',
+                      {'blogs': blogs, 'filter': f, 'category': category, 'categories_list': categories_list})
     else:
         blogs = Blog.objects.all()
         f = Filter(request.GET, queryset=Blog.objects.filter(category='Category 2').order_by('-publish'))
         category = Filter(request.GET, queryset=Blog.objects.filter(category='Category 2').values('category').annotate(
             entries=Count('category')))
-        return render(request, 'blog/category.html', {'blogs': blogs, 'filter': f, 'category': category, 'categories_list': categories_list})
+        return render(request, 'blog/category.html',
+                      {'blogs': blogs, 'filter': f, 'category': category, 'categories_list': categories_list})
 
 
 # User views
@@ -91,15 +93,36 @@ def author(request, user):
         f = Filter(request.GET, queryset=Blog.objects.filter(user=1).order_by('-publish'))
         author = Blog.objects.filter(user=1)
         single_author = author[:1]
-        return render(request, 'blog/author.html', {'blogs': blogs, 'filter': f, 'author': single_author, 'categories_list': categories_list})
+        return render(request, 'blog/author.html',
+                      {'blogs': blogs, 'filter': f, 'author': single_author, 'categories_list': categories_list})
     else:
         blogs = get_object_or_404(Blog, pk=user)
         f = Filter(request.GET, queryset=Blog.objects.filter(user=2).order_by('-publish'))
         author = Blog.objects.filter(user=2)
         single_author = author[:1]
-        return render(request, 'blog/author.html', {'blogs': blogs, 'filter': f, 'author': single_author, 'categories_list': categories_list})
+        return render(request, 'blog/author.html',
+                      {'blogs': blogs, 'filter': f, 'author': single_author, 'categories_list': categories_list})
 
 
+# Contact Us view
+def contact_us(request):
+    if request.method == 'POST':
+        contact_form = ContactForm(data=request.POST)
+        if contact_form.is_valid():
+            contact_form.save()
+            return HttpResponseRedirect(reverse('contact_success'))
+    else:
+        contact_form = CommentForm()
+        contact_form.data['name', 'email', 'message'] = None
+
+    return render(request, 'website/contact_us.html', {'contact_form': contact_form})
+
+
+def contact_success(request):
+    return render(request, 'website/contact_success.html')
+
+
+# Test view - for testing purposes
 def test_user(request):
     categories_list = Filter(request.GET, queryset=Blog.objects.values('category').annotate(entries=Count('category')))
     user_1 = Blog.objects.filter(user=1)
@@ -108,4 +131,5 @@ def test_user(request):
     user2 = user_2[:1]
 
     f = Filter(request.GET, queryset=Blog.objects.all().order_by('-publish'))
-    return render(request, 'blog/test.html', {'user1': user1, 'user2': user2, 'filter': f, 'categories_list': categories_list})
+    return render(request, 'blog/test.html',
+                  {'user1': user1, 'user2': user2, 'filter': f, 'categories_list': categories_list})

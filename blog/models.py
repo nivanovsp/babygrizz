@@ -43,6 +43,20 @@ class Comment(models.Model):
         return 'Comment {} by {}'.format(self.body, self.name)
 
 
+class Contact(models.Model):
+    name = models.CharField(max_length=80)
+    email = models.EmailField()
+    message = models.TextField()
+    sent_on = models.DateTimeField(auto_now_add=True)
+    processed = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ['sent_on']
+
+    def __str__(self):
+        return 'Contact {} by {}'.format(self.message, self.name)
+
+
 # Create filters
 class Filter(django_filters.FilterSet):
     category = django_filters.CharFilter(lookup_expr='iexact')

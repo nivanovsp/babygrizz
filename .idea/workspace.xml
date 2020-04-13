@@ -3,13 +3,21 @@
   <component name="ChangeListManager">
     <list default="true" id="d5665177-59c4-46a0-b7c9-0c5def6bb77a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/babygrizz/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/babygrizz/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/blog/templates/blog/all_blogs.html" beforeDir="false" afterPath="$PROJECT_DIR$/blog/templates/blog/all_blogs.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/blog/templates/blog/all_categories.html" beforeDir="false" afterPath="$PROJECT_DIR$/blog/templates/blog/all_categories.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/blog/templates/blog/author.html" beforeDir="false" afterPath="$PROJECT_DIR$/blog/templates/blog/author.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/templates/blog/base_blogs.html" beforeDir="false" afterPath="$PROJECT_DIR$/blog/templates/blog/base_blogs.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/templates/blog/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/blog/templates/base/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/templates/blog/base_blogs.html" beforeDir="false" afterPath="$PROJECT_DIR$/blog/templates/base/base_blogs.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/templates/blog/blog.html" beforeDir="false" afterPath="$PROJECT_DIR$/blog/templates/blog/blog.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/blog/templates/blog/category.html" beforeDir="false" afterPath="$PROJECT_DIR$/blog/templates/blog/category.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/templates/blog/comment_success.html" beforeDir="false" afterPath="$PROJECT_DIR$/blog/templates/blog/comment_success.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/blog/templates/blog/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/blog/templates/blog/detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/templates/blog/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/blog/templates/blog/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/templates/blog/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/blog/templates/website/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/templates/blog/test.html" beforeDir="false" afterPath="$PROJECT_DIR$/blog/templates/blog/test.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/blog/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
     </list>
@@ -44,16 +52,16 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../todowoo-project" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\Python\babygrizz\blog" />
-      <recent name="D:\Python\babygrizz\media\blog\images" />
-      <recent name="D:\Python\babygrizz\blog\static\blog" />
-      <recent name="D:\Python\babygrizz\static\blog" />
-      <recent name="D:\Python\babygrizz\blog\templates\blog" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Python\babygrizz\static\blog" />
       <recent name="D:\Python\babygrizz\blog\templates\blog" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Python\babygrizz\blog\templates\base" />
+      <recent name="D:\Python\babygrizz\blog\templates" />
+      <recent name="D:\Python\babygrizz\blog\templates\website" />
+      <recent name="D:\Python\babygrizz\blog" />
+      <recent name="D:\Python\babygrizz\media\blog\images" />
     </key>
   </component>
   <component name="SvnConfiguration">
@@ -74,18 +82,18 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2560" y="256" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1586418190009" />
-    <state x="2660" y="275" key="FileChooserDialogImpl" timestamp="1586500564584">
+    <state x="2660" y="275" key="FileChooserDialogImpl" timestamp="1586790333725">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="2660" y="275" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1586500564584" />
-    <state x="2689" y="437" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1586530786816">
+    <state x="2660" y="275" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1586790333725" />
+    <state x="2689" y="437" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1586780525286">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="2689" y="437" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1586530786816" />
-    <state x="2577" y="118" width="606" height="804" key="find.popup" timestamp="1586510046901">
+    <state x="2689" y="437" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1586780525286" />
+    <state x="2577" y="118" width="606" height="804" key="find.popup" timestamp="1586788801125">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="2577" y="118" width="606" height="804" key="find.popup/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1586510046901" />
+    <state x="2577" y="118" width="606" height="804" key="find.popup/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1586788801125" />
     <state x="2543" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1585748495753">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
