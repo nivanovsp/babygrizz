@@ -10,10 +10,8 @@
     {% block page_title %}{% endblock %}
 
     <div class="row">
-        <!-- Sidebar Widgets Column -->
-        <div class="col-md-12">
-
-            <!-- Search Widget -->
+        <!-- Search Widget -->
+        <div class="col-md-8">
             <div class="card mb-4">
                 <h5 class="card-header">Search</h5>
                 <div class="card-body">
@@ -31,10 +29,38 @@
             </div>
         </div>
 
+        <!-- Categories Filters -->
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <h5 class="card-header">Search</h5>
+                <div class="card-body">
+                    <form method="get" class="uniForm">
+                        <div class="form-row">
+                            <div class="col-sm-12">
+                                <a href="{% url 'all_categories' %}" class="btn btn-primary btn-sm">
+                                    All Categories
+                                </a>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-row">
+                            {% for obj in categories_list.qs %}
+                            <div class="col-sm-4">
+                                <a href="{% url 'category' obj.category %}" class="btn btn-primary btn-sm">
+                                    {{ obj.category }}
+                                </a>
+                            </div>
+                            {% endfor %}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% load static %}
 
 {% block blog_content %}{% endblock %}
-
 
 
 {% endblock %}

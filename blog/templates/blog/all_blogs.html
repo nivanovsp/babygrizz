@@ -19,12 +19,13 @@
         {% if obj.published %}
         <div class="col-md-4">
             <div class="card mb-4">
+                <img class="card-img-top" src="{{ obj.image.url }}">
                 <div class="card-body">
                     <h5 class="card-title">{{ obj.title }}</h5>
                     <p>Category:
                         <a href="{% url 'category' obj.category %}">{{ obj.category }}</a>
                     </p>
-                    <p class="card-text">{{ obj.description|striptags|truncatechars:50 }}</p>
+                    <p class="card-text">{{ obj.description|striptags|truncatechars:100 }}</p>
                     <p>Author:
                         <a href="{% url 'author' obj.user_id %}">{{ obj.user.first_name }} {{ obj.user.last_name }}</a>
                     </p>

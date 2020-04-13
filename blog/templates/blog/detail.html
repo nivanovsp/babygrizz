@@ -37,22 +37,20 @@
                 {% video blog.video 'small' %}
 
                 <div class="row">
-
                     <div class="col-md-12 card mb-4  mt-3 ">
                         <div class="card-body">
                             <!-- comments -->
                             <h2>{{ comments.count }} comments</h2>
-
                             {% for comment in comments %}
-                            <div class="comments" style="padding: 10px;">
-                                <p class="font-weight-bold">
-                                    {{ comment.name }}
-                                    <span class=" text-muted font-weight-normal">
-                                        {{ comment.created_on }}
-                                    </span>
-                                </p>
-                                {{ comment.body | linebreaks }}
-                            </div>
+                            <blockquote class="blockquote mb-0">
+                                <p>{{ comment.body | linebreaks }}</p>
+                                <footer class="blockquote-footer">
+                                    {{ comment.name }},
+                                    <cite title="Source Title">
+                                        <strong>{{ comment.created_on }}</strong>
+                                    </cite></footer>
+                            </blockquote>
+                            <br>
                             {% endfor %}
                         </div>
                     </div>
@@ -66,15 +64,14 @@
                             </form>
                         </div>
                     </div>
-                </div>
 
-                <hr>
+                    <hr>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 
-{% load static %}
+    {% load static %}
 
-{% endblock %}
+    {% endblock %}

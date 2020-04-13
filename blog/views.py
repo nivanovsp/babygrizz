@@ -18,18 +18,20 @@ def home(request):
 def blog(request):
     blogs = Blog.objects.all()
     f = Filter(request.GET, queryset=Blog.objects.order_by('-publish'))
-    return render(request, 'blog/blog.html', {'blogs': blogs, 'filter': f})
+    categories_list = Filter(request.GET, queryset=Blog.objects.values('category').annotate(entries=Count('category')))
+    return render(request, 'blog/blog.html', {'blogs': blogs, 'filter': f, 'categories_list': categories_list})
 
 
 def all_blogs(request):
     blogs = Blog.objects.all()
     f = Filter(request.GET, queryset=Blog.objects.all().order_by('-publish'))
-    return render(request, 'blog/all_blogs.html', {'blogs': blogs, 'filter': f})
+    categories_list = Filter(request.GET, queryset=Blog.objects.values('category').annotate(entries=Count('category')))
+    return render(request, 'blog/all_blogs.html', {'blogs': blogs, 'filter': f, 'categories_list': categories_list})
 
 
 def detail(request, blog_id):
     blog = get_object_or_404(Blog, pk=blog_id)
-    comments = blog.comments.filter(active=True)
+    comments = blog.comments.filter(active=True).order_by('-created_on')
     new_comment = None
 
     # Comment posted
@@ -59,45 +61,51 @@ def comment_success(request):
 def all_categories(request):
     blogs = Blog.objects.all()
     f = Filter(request.GET, queryset=Blog.objects.all().order_by('-publish'))
-    return render(request, 'blog/all_categories.html', {'blogs': blogs, 'filter': f})
+    category = Filter(request.GET, queryset=Blog.objects.filter(category='Category 1').values('category').annotate(
+        entries=Count('category')))
+    categories_list = Filter(request.GET, queryset=Blog.objects.values('category').annotate(entries=Count('category')))
+    return render(request, 'blog/all_categories.html', {'blogs': blogs, 'filter': f, 'category': category, 'categories_list': categories_list})
 
 
 def category(request, category):
+    categories_list = Filter(request.GET, queryset=Blog.objects.values('category').annotate(entries=Count('category')))
     if category == 'Category 1':
         blogs = Blog.objects.all()
         f = Filter(request.GET, queryset=Blog.objects.filter(category='Category 1').order_by('-publish'))
         category = Filter(request.GET, queryset=Blog.objects.filter(category='Category 1').values('category').annotate(
             entries=Count('category')))
-        return render(request, 'blog/category.html', {'blogs': blogs, 'filter': f, 'category': category})
+        return render(request, 'blog/category.html', {'blogs': blogs, 'filter': f, 'category': category, 'categories_list': categories_list})
     else:
         blogs = Blog.objects.all()
         f = Filter(request.GET, queryset=Blog.objects.filter(category='Category 2').order_by('-publish'))
         category = Filter(request.GET, queryset=Blog.objects.filter(category='Category 2').values('category').annotate(
             entries=Count('category')))
-        return render(request, 'blog/category.html', {'blogs': blogs, 'filter': f, 'category': category})
+        return render(request, 'blog/category.html', {'blogs': blogs, 'filter': f, 'category': category, 'categories_list': categories_list})
 
 
 # User views
 def author(request, user):
+    categories_list = Filter(request.GET, queryset=Blog.objects.values('category').annotate(entries=Count('category')))
     if user == 1:
         blogs = get_object_or_404(Blog, pk=user)
         f = Filter(request.GET, queryset=Blog.objects.filter(user=1).order_by('-publish'))
         author = Blog.objects.filter(user=1)
         single_author = author[:1]
-        return render(request, 'blog/author.html', {'blogs': blogs, 'filter': f, 'author': single_author})
+        return render(request, 'blog/author.html', {'blogs': blogs, 'filter': f, 'author': single_author, 'categories_list': categories_list})
     else:
         blogs = get_object_or_404(Blog, pk=user)
         f = Filter(request.GET, queryset=Blog.objects.filter(user=2).order_by('-publish'))
         author = Blog.objects.filter(user=2)
         single_author = author[:1]
-        return render(request, 'blog/author.html', {'blogs': blogs, 'filter': f, 'author': single_author})
+        return render(request, 'blog/author.html', {'blogs': blogs, 'filter': f, 'author': single_author, 'categories_list': categories_list})
 
 
 def test_user(request):
+    categories_list = Filter(request.GET, queryset=Blog.objects.values('category').annotate(entries=Count('category')))
     user_1 = Blog.objects.filter(user=1)
     user1 = user_1[:1]
     user_2 = Blog.objects.filter(user=2)
     user2 = user_2[:1]
 
     f = Filter(request.GET, queryset=Blog.objects.all().order_by('-publish'))
-    return render(request, 'blog/test.html', {'user1': user1, 'user2': user2, 'filter': f})
+    return render(request, 'blog/test.html', {'user1': user1, 'user2': user2, 'filter': f, 'categories_list': categories_list})
