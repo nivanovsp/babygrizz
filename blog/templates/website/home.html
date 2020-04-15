@@ -2,14 +2,55 @@
 
 {% block content %}
 
-<h1>Home</h1>
+<div class="container-fluid bg-light">
 
+    <div class="col-md-12">
+        <h1 class="my-4">Baby Grizzly
+            <small>Home</small>
+        </h1>
+    </div>
+    <div class="row">
+        <img src="/media/blog/images/home-test.jpg" class="img-fluid" alt="Responsive image">
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="mt-4">Who we are</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sedulo, inquam, faciam. Traditur, inquit, ab
+                Epicuro ratio neglegendi doloris. Quo modo? Primum quid tu dicis breve? <i>Quid ergo?</i> Duo Reges:
+                constructio interrete. </p>
+
+            <p>Ita enim vivunt quidam, ut eorum vita refellatur oratio. Id enim natura desiderat. <i>Quod cum dixissent,
+                ille contra.</i> Quo modo autem philosophus loquitur? <b>Quod ea non occurrentia fingunt, vincunt
+                Aristonem;</b> Idemque diviserunt naturam hominis in animum et corpus. </p>
+            <img class="img-fluid rounded" src="{{ blog.image.url }}" alt="">
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <img src="/media/blog/images/home2-test.jpg" class="img-fluid" alt="Responsive image">
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="mt-4">Our mission</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Haec para/doca illi, nos admirabilia dicamus. Et
+                nemo nimium beatus est; An tu me de L. Age sane, inquam. Tum mihi Piso: Quid ergo? </p>
+
+            <p>Duo Reges: constructio interrete. Suo genere perveniant ad extremum; Sullae consulatum? Ego vero isti,
+                inquam, permitto. Hoc ipsum elegantius poni meliusque potuit. Quid nunc honeste dicit? </p>
+
+            <img class="img-fluid rounded" src="{{ blog.image.url }}" alt="">
+        </div>
+    </div>
+</div>
+
+
+<br>
+<br>
+<br>
 <div class="p-3 mb-2 bg-light text-dark">
     <a href="{% url 'test_user' %}" class="btn btn-primary">TEST</a>
-</div>
-
-<div class="container-fluid bg-light">
     <a href="{% url 'contact_us' %}" class="btn btn-primary">Contact Us</a>
 </div>
+
 
 {% endblock %}
