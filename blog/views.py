@@ -112,7 +112,7 @@ def contact_us(request):
             contact_form.save()
             return HttpResponseRedirect(reverse('contact_success'))
     else:
-        contact_form = CommentForm()
+        contact_form = ContactForm()
         contact_form.data['name', 'email', 'message'] = None
 
     return render(request, 'website/contact_us.html', {'contact_form': contact_form})
@@ -120,16 +120,3 @@ def contact_us(request):
 
 def contact_success(request):
     return render(request, 'website/contact_success.html')
-
-
-# Test view - for testing purposes
-def test_user(request):
-    categories_list = Filter(request.GET, queryset=Blog.objects.values('category').annotate(entries=Count('category')))
-    user_1 = Blog.objects.filter(user=1)
-    user1 = user_1[:1]
-    user_2 = Blog.objects.filter(user=2)
-    user2 = user_2[:1]
-
-    f = Filter(request.GET, queryset=Blog.objects.all().order_by('-publish'))
-    return render(request, 'blog/test.html',
-                  {'user1': user1, 'user2': user2, 'filter': f, 'categories_list': categories_list})

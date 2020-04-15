@@ -19,9 +19,9 @@ class CommentAdmin(admin.ModelAdmin):
         queryset.update(active=True)
 
 
-class ContactUsAdmin(admin.ModelAdmin):
+class ContactAdmin(admin.ModelAdmin):
     list_display = ('name', 'email', 'message', 'sent_on', 'processed')
-    list_filter = ('name', 'email', 'message', 'sent_on')
+    list_filter = ('name', 'email', 'message', 'sent_on', 'processed')
     search_fields = ('name', 'email', 'message', 'sent_on')
     actions = ['contact_processed']
 
@@ -32,4 +32,4 @@ class ContactUsAdmin(admin.ModelAdmin):
 # Register your models here.
 admin.site.register(Blog, BlogAdmin)
 admin.site.register(Comment, CommentAdmin)
-admin.site.register(Contact, ContactUsAdmin)
+admin.site.register(Contact, ContactAdmin)

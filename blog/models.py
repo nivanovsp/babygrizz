@@ -43,6 +43,7 @@ class Comment(models.Model):
         return 'Comment {} by {}'.format(self.body, self.name)
 
 
+# Test Form
 class Contact(models.Model):
     name = models.CharField(max_length=80)
     email = models.EmailField()
